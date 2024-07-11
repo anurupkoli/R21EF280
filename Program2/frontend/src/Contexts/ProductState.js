@@ -9,10 +9,14 @@ const ProductState = (props) => {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-        },
+        }
       }
     );
-    
+
+    if (!resp.ok) {
+        throw new Error(`HTTP error! Status: ${resp.status}`);
+      }
+
     const json = await resp.json();
     console.log(json);
   };
