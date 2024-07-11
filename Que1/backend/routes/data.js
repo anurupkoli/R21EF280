@@ -114,7 +114,7 @@ const productData = [
 
 //route to get product w.r.t it's id
 router.get(
-  "categories/products/:productid",
+  "/categories/products/:productid",
   (req, res) => {
     try {
       const { productid } = req.params;
