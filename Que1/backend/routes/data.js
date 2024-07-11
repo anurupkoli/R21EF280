@@ -112,6 +112,24 @@ const productData = [
       },
 ];
 
+//route to get product w.r.t it's id
+router.get(
+  "categories/products/:productid",
+  (req, res) => {
+    try {
+      const { productid } = req.params;
+      let data = {}
+      data = productData.find(element => element.id = productid)
+      res.status(200).json(data);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json("Some Error Occured")
+    }
+  }
+);
+
+
+//route to get all the data
 router.get("/categories/products", (req, res) => {
     try {
       let data = [];
@@ -127,9 +145,9 @@ router.get("/categories/products", (req, res) => {
   });
 
 
+//route to get data w.r.t categories, and limited to totResponses{integer}
 router.get("/categories/:categoryname/products/:totRes", (req, res) => {
   try {
-    console.log("category")
     const { categoryname, totRes } = req.params;
     let data = [];
     productData.forEach((element) => {
@@ -148,26 +166,5 @@ router.get("/categories/:categoryname/products/:totRes", (req, res) => {
   }
 });
 
-router.get(
-  "categories/:categoryname/products/:productid/:totRes",
-  (req, res) => {
-    try {
-      const { categorname, productid, totRes } = req.params;
-      let data = [];
-      productData.forEach((element) => {
-        if (element.category == categorname && element.productid == productid) {
-          data.push(element);
-          if (data.length >= totRes) {
-            return res.status(200).json(data);
-          }
-        }
-      });
-      res.status(200).json(data);
-    } catch (error) {
-        console.log(error);
-        res.status(400).json("Some Error Occured")
-    }
-  }
-);
 
 module.exports = router

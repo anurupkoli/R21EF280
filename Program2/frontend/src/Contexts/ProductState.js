@@ -13,24 +13,7 @@ const ProductState = (props)=>{
         const json = await resp.json();
         console.log(json)
     }
-
-    const writeData = async(data)=>{
-        let resp = await fetch(`${HOST}/api/data/writeData`, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                name: data.name,
-                designation: data.designation,
-                from: data.from
-            })
-        })
-
-        let json = await resp.json();
-        alert(json.Acknowledgement);
-    }
-    return(<ProductContext.Provider value={{fetchData, writeData}}>
+    return(<ProductContext.Provider value={{fetchData}}>
         {props.children}
     </ProductContext.Provider>)
 }

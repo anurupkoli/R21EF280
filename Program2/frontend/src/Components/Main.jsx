@@ -7,6 +7,7 @@ export default function Main() {
   const {fetchData}  = productContext;
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, [])
   
   return (
